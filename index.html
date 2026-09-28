@@ -97,6 +97,8 @@
     .publication-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 24px; }
     .resource-link { background: #363636; color: #fff; border-radius: 999px; padding: 10px 20px; font-size: 16px; }
     .resource-link:hover { background: #252525; text-decoration: none; }
+    .resource-note { font-size: 0.85em; opacity: 0.85; }
+    .bibtex-placeholder { margin: 0; padding: 24px; border-radius: 8px; background: #f5f5f5; color: var(--muted); font-size: 15px; overflow-x: auto; }
     [hidden] { display: none !important; }
     @media (max-width: 1000px) {
       .container { width: min(960px, calc(100% - 40px)); }
@@ -148,16 +150,16 @@
         <div class="publication-authors" aria-label="Authors">
           <div class="author-row">
           <span class="author-block"><a href="https://jhkim-snu.github.io/" target="_blank" rel="noopener noreferrer">Junghyun Kim</a><sup>1,2,*</sup></span>
-          <span class="author-block"><span class="author-name">Ngseo Kim</span><sup>2,*</sup></span>
+          <span class="author-block"><a href="https://ngseo.kim/" target="_blank" rel="noopener noreferrer">Ngseo Kim</a><sup>2,*</sup></span>
           <span class="author-block"><a href="https://www.alphaxiv.org/@chungwoo-lee" target="_blank" rel="noopener noreferrer">ChungWoo Lee</a><sup>2</sup></span>
-          <span class="author-block"><span class="author-name">Seoyeon Lee</span><sup>2</sup></span>
-          <span class="author-block"><span class="author-name">Woo-Jeong Baek</span><sup>5</sup></span>
+          <span class="author-block"><a href="https://bi.snu.ac.kr/members/seoyeon-lee.html" target="_blank" rel="noopener noreferrer">Seoyeon Lee</a><sup>2</sup></span>
+          <span class="author-block"><a href="https://scholar.google.com/citations?user=KlIs05EAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Woo-Jeong Baek</a><sup>5</sup></span>
         </div>
           <div class="author-row">
-          <span class="author-block"><span class="author-name">Adam Zhou</span><sup>1</sup></span>
+          <span class="author-block"><a href="https://www.linkedin.com/in/adamzhou17" target="_blank" rel="noopener noreferrer">Adam Zhou</a><sup>1</sup></span>
           <span class="author-block"><a href="https://huyenchip.com/" target="_blank" rel="noopener noreferrer">Chip Huyen</a><sup>1</sup></span>
           <span class="author-block"><a href="https://junkilee.github.io/" target="_blank" rel="noopener noreferrer">Jun-Ki Lee</a><sup>2,†</sup></span>
-          <span class="author-block"><span class="author-name">Gi-Cheon Kang</span><sup>3,†</sup></span>
+          <span class="author-block"><a href="https://heilaboratory.github.io/team/gckang" target="_blank" rel="noopener noreferrer">Gi-Cheon Kang</a><sup>3,†</sup></span>
           <span class="author-block"><a href="https://bi.snu.ac.kr/members/byoung-tak-zhang.html" target="_blank" rel="noopener noreferrer">Byoung-Tak Zhang</a><sup>2,4,†</sup></span>
         </div>
         </div>
@@ -167,14 +169,16 @@
         </p>
 
         <div class="publication-affiliations" aria-label="Affiliations">
-          <div class="affiliation-row"><span class="affiliation-block"><sup>1</sup>OpenMind, San Francisco Bay Area, CA, USA</span><span class="affiliation-block"><sup>2</sup>Seoul National University</span></div>
-          <div class="affiliation-row"><span class="affiliation-block"><sup>3</sup>Ajou University</span><span class="affiliation-block"><sup>4</sup>Tommoro Robotics</span><span class="affiliation-block"><sup>5</sup>Hyundai Motors</span></div>
+          <div class="affiliation-row"><span class="affiliation-block"><sup>1</sup>OpenMind, San Francisco, CA, USA</span><span class="affiliation-block"><sup>2</sup>Seoul National University, Korea</span></div>
+          <div class="affiliation-row"><span class="affiliation-block"><sup>3</sup>Ajou University, Korea</span><span class="affiliation-block"><sup>4</sup>Tommoro Robotics, Korea</span><span class="affiliation-block"><sup>5</sup>Hyundai Motors, Korea</span></div>
         </div>
 
-        <!-- RESOURCE LINKS: intentionally hidden until real URLs are provided.
-             Add real <a class="resource-link" href="...">Paper</a> / Code links
-             here, then remove `hidden`. Do not insert placeholder href="#" links. -->
-        <nav class="publication-links" aria-label="Project resources" hidden></nav>
+        <!-- Replace the self-links with release URLs when the resources are available. -->
+        <nav class="publication-links" aria-label="Project resources">
+          <a class="resource-link" href="#">Paper <span class="resource-note">(Coming Soon)</span></a>
+          <a class="resource-link" href="#">Code <span class="resource-note">(Coming Soon)</span></a>
+          <a class="resource-link" href="#">Models <span class="resource-note">(Coming Soon)</span></a>
+        </nav>
       </div>
     </header>
 
@@ -196,8 +200,11 @@
     <section id="experiments" class="section" aria-label="Experiments" hidden>
       <div class="container research-content"><!-- Add verified results and DILL rollouts here. --></div>
     </section>
-    <section id="bibtex" class="section" aria-label="BibTeX" hidden>
-      <div class="container research-content"><!-- Add the final citation after release. --></div>
+    <section id="bibtex" class="section" aria-labelledby="bibtex-heading">
+      <div class="container research-content">
+        <h2 id="bibtex-heading" class="section-title">BibTeX</h2>
+        <pre class="bibtex-placeholder"><code>Coming Soon</code></pre>
+      </div>
     </section>
   </main>
 
