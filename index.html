@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DILL | Disentangling Spurious Correlations in Vision-Language-Action Models via Predicting Domain-Invariant Latent Lookahead</title>
+  <meta name="description" content="Disentangling Spurious Correlations in Vision-Language-Action Models via Predicting Domain-Invariant Latent Lookahead">
+  <meta property="og:title" content="DILL | Disentangling Spurious Correlations in Vision-Language-Action Models via Predicting Domain-Invariant Latent Lookahead">
+  <meta property="og:description" content="Disentangling Spurious Correlations in Vision-Language-Action Models via Predicting Domain-Invariant Latent Lookahead">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Optional online typography. No fonts are bundled; offline viewing uses system fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,600,700%7CNoto+Sans:400,600,700&amp;display=swap" rel="stylesheet">
+  <style>
+    /* Header layout adapted from OpenVLA / Nerfies (CC BY-SA 4.0).
+       This starter removes original research content, scripts and assets. */
+    :root {
+      color-scheme: light;
+      --ink: #363636;
+      --body: #4a4a4a;
+      --link: #1675b6;
+      --muted: #717171;
+      --rule: #ececec;
+    }
+    * { box-sizing: border-box; }
+    html { background: #fff; }
+    body {
+      margin: 0;
+      color: var(--body);
+      background: #fff;
+      font-family: 'Noto Sans', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    a:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; border-radius: 2px; }
+    main { min-height: calc(100svh - 106px); }
+    .container { width: min(1100px, calc(100% - 48px)); margin-inline: auto; }
+    .publication-header { padding: 50px 0 48px; text-align: center; }
+    .publication-title {
+      margin: 0 0 30px;
+      color: var(--ink);
+      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.9px;
+    }
+    .project-name { display: block; font-size: 48px; line-height: 1.18; margin-bottom: 11px; }
+    .paper-title { display: block; font-size: 37px; line-height: 1.26; }
+    .title-line { display: block; }
+    .publication-authors {
+      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.65;
+    }
+    .author-row { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 18px; }
+    .author-block { display: inline-block; white-space: nowrap; }
+    sup { position: relative; vertical-align: baseline; top: -0.48em; font-size: 0.67em; line-height: 0; }
+    .author-block sup { margin-left: 1px; }
+    .author-name { color: var(--body); }
+    .contribution-note {
+      margin: 13px 0 20px;
+      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .contribution-note span { display: inline-block; margin: 0 10px; }
+    .publication-affiliations {
+      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.75;
+    }
+    .affiliation-row { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 24px; }
+    .affiliation-block { display: inline-block; }
+    .affiliation-block sup { margin-right: 3px; }
+    .project-placeholder { text-align: center; padding: 23px 0 90px; }
+    .placeholder-rule { width: 64px; border: 0; border-top: 1px solid #d8d8d8; margin: 0 auto 23px; }
+    .project-placeholder p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+    .footer {
+      border-top: 1px solid var(--rule);
+      padding: 25px 24px;
+      color: var(--muted);
+      background: #fafafa;
+      text-align: center;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+    .footer p { margin: 0; }
+    .footer a { color: #5b5b5b; text-decoration: underline; text-underline-offset: 2px; }
+    /* Ready for later content; no unfinished research claims are displayed. */
+    .section { padding: 48px 0; }
+    .section-title { color: var(--ink); font-size: 30px; line-height: 1.25; margin: 0 0 24px; }
+    .research-content { max-width: 960px; margin-inline: auto; line-height: 1.75; }
+    .research-content img, .research-content video { display: block; width: 100%; height: auto; }
+    .publication-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 24px; }
+    .resource-link { background: #363636; color: #fff; border-radius: 999px; padding: 10px 20px; font-size: 16px; }
+    .resource-link:hover { background: #252525; text-decoration: none; }
+    [hidden] { display: none !important; }
+    @media (max-width: 1000px) {
+      .container { width: min(960px, calc(100% - 40px)); }
+      .paper-title { font-size: 32px; }
+      .publication-authors { font-size: 18px; }
+      .author-row { column-gap: 15px; }
+      .publication-affiliations { font-size: 17px; }
+    }
+    @media (max-width: 700px) {
+      .container { width: calc(100% - 32px); }
+      .publication-header { padding: 36px 0 35px; }
+      .publication-title { letter-spacing: -0.5px; margin-bottom: 25px; }
+      .project-name { font-size: 42px; margin-bottom: 14px; }
+      .paper-title { font-size: clamp(25px, 4.8vw, 32px); line-height: 1.3; }
+      .title-line { display: inline; }
+      .publication-authors { font-size: 17px; line-height: 1.95; }
+      .author-row { display: contents; }
+      .author-block { margin: 0 6px; }
+      .contribution-note { font-size: 12px; margin: 16px 0 19px; }
+      .contribution-note span { margin: 0 6px; }
+      .publication-affiliations { font-size: 15px; line-height: 1.85; }
+      .affiliation-row { column-gap: 16px; }
+      .project-placeholder { padding: 22px 0 64px; }
+      .footer { font-size: 11px; padding: 20px 18px; }
+    }
+    @media print {
+      .publication-header { padding-top: 20px; }
+      main { min-height: 0; }
+      .project-placeholder { padding-bottom: 30px; }
+      .footer { background: #fff; }
+    }
+
+  </style>
+</head>
+<body>
+  <main>
+    <header class="publication-header">
+      <div class="container">
+        <h1 class="publication-title">
+          <span class="project-name">DILL</span>
+          <span class="paper-title">
+            <span class="title-line">Disentangling Spurious Correlations in</span>
+            <span class="title-line">Vision-Language-Action Models via Predicting</span>
+            <span class="title-line">Domain-Invariant Latent Lookahead</span>
+          </span>
+        </h1>
+
+        <!-- AUTHOR BLOCK: source is the user's 2026-09-07 LaTeX author block. -->
+        <div class="publication-authors" aria-label="Authors">
+          <div class="author-row">
+          <span class="author-block"><a href="https://jhkim-snu.github.io/" target="_blank" rel="noopener noreferrer">Junghyun Kim</a><sup>1,2,*</sup></span>
+          <span class="author-block"><span class="author-name">Ngseo Kim</span><sup>2,*</sup></span>
+          <span class="author-block"><a href="https://www.alphaxiv.org/@chungwoo-lee" target="_blank" rel="noopener noreferrer">ChungWoo Lee</a><sup>2</sup></span>
+          <span class="author-block"><span class="author-name">Seoyeon Lee</span><sup>2</sup></span>
+          <span class="author-block"><span class="author-name">Woo-Jeong Baek</span><sup>5</sup></span>
+        </div>
+          <div class="author-row">
+          <span class="author-block"><span class="author-name">Adam Zhou</span><sup>1</sup></span>
+          <span class="author-block"><a href="https://huyenchip.com/" target="_blank" rel="noopener noreferrer">Chip Huyen</a><sup>1</sup></span>
+          <span class="author-block"><a href="https://junkilee.github.io/" target="_blank" rel="noopener noreferrer">Jun-Ki Lee</a><sup>2,†</sup></span>
+          <span class="author-block"><span class="author-name">Gi-Cheon Kang</span><sup>3,†</sup></span>
+          <span class="author-block"><a href="https://bi.snu.ac.kr/members/byoung-tak-zhang.html" target="_blank" rel="noopener noreferrer">Byoung-Tak Zhang</a><sup>2,4,†</sup></span>
+        </div>
+        </div>
+        <p class="contribution-note">
+          <span><sup>*</sup> Equal contribution</span>
+          <span><sup>†</sup> Corresponding authors</span>
+        </p>
+
+        <div class="publication-affiliations" aria-label="Affiliations">
+          <div class="affiliation-row"><span class="affiliation-block"><sup>1</sup>OpenMind, San Francisco Bay Area, CA, USA</span><span class="affiliation-block"><sup>2</sup>Seoul National University</span></div>
+          <div class="affiliation-row"><span class="affiliation-block"><sup>3</sup>Ajou University</span><span class="affiliation-block"><sup>4</sup>Tommoro Robotics</span><span class="affiliation-block"><sup>5</sup>Hyundai Motors</span></div>
+        </div>
+
+        <!-- RESOURCE LINKS: intentionally hidden until real URLs are provided.
+             Add real <a class="resource-link" href="...">Paper</a> / Code links
+             here, then remove `hidden`. Do not insert placeholder href="#" links. -->
+        <nav class="publication-links" aria-label="Project resources" hidden></nav>
+      </div>
+    </header>
+
+    <section class="project-placeholder" aria-label="Project materials status">
+      <div class="container">
+        <hr class="placeholder-rule">
+        <p>Project details coming soon.</p>
+      </div>
+    </section>
+
+    <!-- FUTURE CONTENT. Keep these sections hidden until reviewed content is ready.
+         No OpenVLA figures, videos, claims, paper links or model links are included. -->
+    <section id="overview" class="section" aria-label="Overview" hidden>
+      <div class="container research-content"><!-- Add DILL teaser and overview here. --></div>
+    </section>
+    <section id="method" class="section" aria-label="Method" hidden>
+      <div class="container research-content"><!-- Add the approved method explanation here. --></div>
+    </section>
+    <section id="experiments" class="section" aria-label="Experiments" hidden>
+      <div class="container research-content"><!-- Add verified results and DILL rollouts here. --></div>
+    </section>
+    <section id="bibtex" class="section" aria-label="BibTeX" hidden>
+      <div class="container research-content"><!-- Add the final citation after release. --></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Website layout adapted from <a href="https://openvla.github.io/" target="_blank" rel="noopener noreferrer">OpenVLA</a>,
+      originally based on <a href="https://nerfies.github.io/" target="_blank" rel="noopener noreferrer">Nerfies</a>.</p>
+    <p>Template adaptations are shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</p>
+  </footer>
+</body>
+</html>
