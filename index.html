@@ -4,165 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DILL | Disentangling Spurious Correlations in Vision-Language-Action Models via Predicting Domain-Invariant Latent Lookahead</title>
-  <meta name="description" content="Disentangling Spurious Correlations in Vision-Language-Action Models via Predicting Domain-Invariant Latent Lookahead">
+  <meta name="description" content="DILL learns task-relevant future representations to reduce visual shortcuts and improve robot robustness.">
   <meta property="og:title" content="DILL | Disentangling Spurious Correlations in Vision-Language-Action Models via Predicting Domain-Invariant Latent Lookahead">
-  <meta property="og:description" content="Disentangling Spurious Correlations in Vision-Language-Action Models via Predicting Domain-Invariant Latent Lookahead">
+  <meta property="og:description" content="DILL learns task-relevant future representations to reduce visual shortcuts and improve robot robustness.">
   <meta property="og:type" content="website">
   <meta name="theme-color" content="#ffffff">
   <!-- Optional online typography. No fonts are bundled; offline viewing uses system fonts. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500,600,700%7CNoto+Sans:400,600,700&amp;display=swap" rel="stylesheet">
-  <style>
-    /* Header layout adapted from OpenVLA / Nerfies (CC BY-SA 4.0).
-       This starter removes original research content, scripts and assets. */
-    :root {
-      color-scheme: light;
-      --ink: #363636;
-      --body: #4a4a4a;
-      --link: #1675b6;
-      --muted: #717171;
-      --rule: #ececec;
-    }
-    * { box-sizing: border-box; }
-    html { background: #fff; }
-    body {
-      margin: 0;
-      color: var(--body);
-      background: #fff;
-      font-family: 'Noto Sans', Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    a:focus-visible { outline: 2px solid var(--link); outline-offset: 4px; border-radius: 2px; }
-    main { min-height: calc(100svh - 106px); }
-    .container { width: min(1100px, calc(100% - 48px)); margin-inline: auto; }
-    .publication-header { padding: 32px 0 48px; text-align: center; }
-    .institution-logos {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      max-width: 1000px;
-      margin: 0 auto 46px;
-      padding: 0;
-      list-style: none;
-    }
-    .institution-logo {
-      flex: 1 1 0;
-      min-width: 0;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .institution-logo img { display: block; width: 100%; height: auto; }
-    .institution-logo--openmind img { max-width: 164px; }
-    .institution-logo--aiis img { max-width: 152px; }
-    .institution-logo--ajou img { max-width: 184px; }
-    .institution-logo--tommoro img { max-width: 184px; filter: brightness(0); }
-    /* Preserve the supplied Hyundai image; compensate for its built-in white margin. */
-    .institution-logo--hyundai img { width: 123%; max-width: 202px; flex-shrink: 0; }
-    .publication-title {
-      margin: 0 0 30px;
-      color: var(--ink);
-      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
-      font-weight: 600;
-      letter-spacing: -0.9px;
-    }
-    .project-name { display: block; font-size: 48px; line-height: 1.18; margin-bottom: 11px; }
-    .paper-title { display: block; font-size: 37px; line-height: 1.26; }
-    .title-line { display: block; }
-    .publication-authors {
-      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
-      font-size: 20px;
-      line-height: 1.65;
-    }
-    .author-row { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 18px; }
-    .author-block { display: inline-block; white-space: nowrap; }
-    sup { position: relative; vertical-align: baseline; top: -0.48em; font-size: 0.67em; line-height: 0; }
-    .author-block sup { margin-left: 1px; }
-    .author-name { color: var(--body); }
-    .contribution-note {
-      margin: 13px 0 20px;
-      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-    .contribution-note span { display: inline-block; margin: 0 10px; }
-    .publication-affiliations {
-      font-family: 'Google Sans', 'Noto Sans', Arial, sans-serif;
-      font-size: 18px;
-      line-height: 1.75;
-    }
-    .affiliation-row { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 24px; }
-    .affiliation-block { display: inline-block; }
-    .affiliation-block sup { margin-right: 3px; }
-    .project-placeholder { text-align: center; padding: 23px 0 90px; }
-    .placeholder-rule { width: 64px; border: 0; border-top: 1px solid #d8d8d8; margin: 0 auto 23px; }
-    .project-placeholder p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
-    .footer {
-      border-top: 1px solid var(--rule);
-      padding: 25px 24px;
-      color: var(--muted);
-      background: #fafafa;
-      text-align: center;
-      font-size: 12px;
-      line-height: 1.9;
-    }
-    .footer p { margin: 0; }
-    .footer a { color: #5b5b5b; text-decoration: underline; text-underline-offset: 2px; }
-    /* Ready for later content; no unfinished research claims are displayed. */
-    .section { padding: 48px 0; }
-    .section-title { color: var(--ink); font-size: 30px; line-height: 1.25; margin: 0 0 24px; }
-    .research-content { max-width: 960px; margin-inline: auto; line-height: 1.75; }
-    .research-content img, .research-content video { display: block; width: 100%; height: auto; }
-    .publication-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 24px; }
-    .resource-link { background: #363636; color: #fff; border-radius: 999px; padding: 10px 20px; font-size: 16px; }
-    .resource-link:hover { background: #252525; text-decoration: none; }
-    .resource-note { font-size: 0.85em; opacity: 0.85; }
-    .bibtex-placeholder { margin: 0; padding: 24px; border-radius: 8px; background: #f5f5f5; color: var(--muted); font-size: 15px; overflow-x: auto; }
-    [hidden] { display: none !important; }
-    @media (max-width: 1000px) {
-      .institution-logos { gap: 24px; }
-      .container { width: min(960px, calc(100% - 40px)); }
-      .paper-title { font-size: 32px; }
-      .publication-authors { font-size: 18px; }
-      .author-row { column-gap: 15px; }
-      .publication-affiliations { font-size: 17px; }
-    }
-    @media (max-width: 700px) {
-      .container { width: calc(100% - 32px); }
-      .publication-header { padding: 24px 0 35px; }
-      .institution-logos { flex-wrap: wrap; gap: 14px 22px; max-width: 520px; margin-bottom: 32px; }
-      .institution-logo { flex: 0 1 calc((100% - 44px) / 3); height: 48px; }
-      .publication-title { letter-spacing: -0.5px; margin-bottom: 25px; }
-      .project-name { font-size: 42px; margin-bottom: 14px; }
-      .paper-title { font-size: clamp(25px, 4.8vw, 32px); line-height: 1.3; }
-      .title-line { display: inline; }
-      .publication-authors { font-size: 17px; line-height: 1.95; }
-      .author-row { display: contents; }
-      .author-block { margin: 0 6px; }
-      .contribution-note { font-size: 12px; margin: 16px 0 19px; }
-      .contribution-note span { margin: 0 6px; }
-      .publication-affiliations { font-size: 15px; line-height: 1.85; }
-      .affiliation-row { column-gap: 16px; }
-      .project-placeholder { padding: 22px 0 64px; }
-      .footer { font-size: 11px; padding: 20px 18px; }
-    }
-    @media print {
-      .publication-header { padding-top: 20px; }
-      main { min-height: 0; }
-      .project-placeholder { padding-bottom: 30px; }
-      .footer { background: #fff; }
-    }
-
-  </style>
+  <link rel="stylesheet" href="site.css">
 </head>
-<body>
+<body id="top">
+  <a class="skip-link" href="#demo">Skip to research</a>
   <main>
     <header class="publication-header">
       <div class="container">
@@ -221,30 +75,97 @@
       </div>
     </header>
 
-    <section class="project-placeholder" aria-label="Project materials status">
+    <nav class="section-nav" aria-label="Explore the research">
+      <div class="nav-inner"><a class="nav-brand" href="#top">DILL</a><div class="nav-links"><a href="#demo">Demo</a><a href="#shortcut">Problem</a><a href="#idea">Idea</a><a href="#method">Method</a><a href="#results">Results</a></div><button id="motion-toggle" type="button" aria-label="Pause videos" aria-pressed="false"><span class="motion-icon" aria-hidden="true">Ⅱ</span><span class="motion-label">Pause videos</span></button></div>
+    </nav>
+
+    <section id="demo" class="story-section hero-demo">
       <div class="container">
-        <hr class="placeholder-rule">
-        <p>Project details coming soon.</p>
+        <p class="eyebrow">What DILL can do</p>
+        <h2>Same task. <span class="accent">Different visual conditions.</span></h2>
+        <p class="section-intro">DILL helps robots stay on task when the visual world changes.</p>
+        <div class="condition-flow" aria-label="Real-world training condition and evaluation conditions">
+          <figure class="condition training-condition"><div class="condition-group">Training</div><img src="images/train.jpeg" width="640" height="480" alt="Robot closing a laptop in the training setup"><figcaption>Training condition</figcaption></figure>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <div class="evaluation-conditions"><div class="condition-group">DILL evaluation · “Close the laptop.”</div><div class="condition-grid">
+            <figure class="condition"><img src="images/original.png" width="640" height="480" alt="Laptop task with no visual perturbation"><figcaption>Original <small>(no perturbation)</small></figcaption></figure>
+            <figure class="condition"><img src="images/viewpoint.jpeg" width="640" height="480" alt="Laptop task from a changed camera viewpoint"><figcaption>Viewpoint</figcaption></figure>
+            <figure class="condition"><img src="images/background.jpeg" width="640" height="480" alt="Laptop task with a different background"><figcaption>Background</figcaption></figure>
+            <figure class="condition"><img src="images/lightning.jpeg" width="640" height="480" alt="Laptop task under changed lighting"><figcaption>Lighting</figcaption></figure>
+            <figure class="condition"><img src="images/noise.jpeg" width="640" height="480" alt="Laptop task with image noise"><figcaption>Noise</figcaption></figure>
+          </div></div>
+        </div>
+        <div class="benchmark-block">
+          <div class="benchmark-copy"><p class="eyebrow">Visual robustness</p><h3>Visual shifts can sharply reduce success.</h3><p>DILL limits that drop by learning features that matter for the task.</p><p class="micro">Success-rate drop ↓<br>Smaller is better · percentage points</p></div>
+          <div class="drop-chart" role="img" aria-label="Mean success-rate drop: OpenVLA 61.8 percentage points, WorldVLA 61.2, UniVLA 52.3, OpenVLA-OFT 37.6, DILL 12.5. Lower is better.">
+            <div class="drop-row"><span>OpenVLA</span><div class="bar-track"><i style="--bar:95.08%"></i></div><b>−61.8<small> pp</small></b></div>
+            <div class="drop-row"><span>WorldVLA</span><div class="bar-track"><i style="--bar:94.15%"></i></div><b>−61.2<small> pp</small></b></div>
+            <div class="drop-row"><span>UniVLA</span><div class="bar-track"><i style="--bar:80.46%"></i></div><b>−52.3<small> pp</small></b></div>
+            <div class="drop-row"><span>OpenVLA-OFT</span><div class="bar-track"><i style="--bar:57.85%"></i></div><b>−37.6<small> pp</small></b></div>
+            <div class="drop-row ours"><span>DILL <small>(ours)</small></span><div class="bar-track"><i style="--bar:19.23%"></i></div><b>−12.5<small> pp</small></b></div>
+            <p class="chart-note">Simulation benchmark · Mean drop across four visual perturbation categories.</p>
+          </div>
+        </div>
+        <div class="overview"><h3>DILL, in a nutshell</h3><p>Vision-language-action models can confuse visual context with the task itself. <strong>Domain-Invariant Latent Lookahead (DILL)</strong> trains them to predict task-relevant future representations while separating out domain-specific cues. This reduces shortcut behavior and improves robustness to visual changes.</p></div>
       </div>
     </section>
 
-    <!-- FUTURE CONTENT. Keep these sections hidden until reviewed content is ready.
-         No OpenVLA figures, videos, claims, paper links or model links are included. -->
-    <section id="overview" class="section" aria-label="Overview" hidden>
-      <div class="container research-content"><!-- Add DILL teaser and overview here. --></div>
-    </section>
-    <section id="method" class="section" aria-label="Method" hidden>
-      <div class="container research-content"><!-- Add the approved method explanation here. --></div>
-    </section>
-    <section id="experiments" class="section" aria-label="Experiments" hidden>
-      <div class="container research-content"><!-- Add verified results and DILL rollouts here. --></div>
-    </section>
-    <section id="bibtex" class="section" aria-labelledby="bibtex-heading">
-      <div class="container research-content">
-        <h2 id="bibtex-heading" class="section-title">BibTeX</h2>
-        <pre class="bibtex-placeholder"><code>Coming Soon</code></pre>
+    <section id="shortcut" class="story-section section-tint">
+      <div class="container">
+        <p class="eyebrow">The shortcut problem</p><h2>Following the instruction—or the camera?</h2>
+        <p class="section-intro">When camera view and task always appear together, a robot can learn the wrong association.</p>
+        <div class="shortcut-layout">
+          <div class="training-examples"><h3 class="panel-label">Training · View and task are correlated</h3><div class="training-pair">
+            <figure class="video-card"><video controls muted loop playsinline preload="none" width="640" height="480" poster="images/poster-shortcut-red-train.jpg" src="videos/shortcut/put the red die in the basket - train (right view).mp4" aria-label="Training: right view, put the red die in the basket"></video><figcaption><span class="video-kicker">Right view</span><span>“Put the <strong class="red-word">red die</strong> in the basket.”</span></figcaption></figure>
+            <figure class="video-card"><video controls muted loop playsinline preload="none" width="640" height="480" poster="images/poster-shortcut-blue-train.jpg" src="videos/shortcut/put the blue die in the basket - train (left view).mp4" aria-label="Training: left view, put the blue die in the basket"></video><figcaption><span class="video-kicker">Left view</span><span>“Put the <strong class="blue-word">blue die</strong> in the basket.”</span></figcaption></figure>
+          </div></div>
+          <div class="test-example"><h3 class="panel-label">Test → Change the instruction</h3><figure class="video-card failure-card"><video id="shortcut-test" controls muted loop playsinline preload="none" width="640" height="480" poster="images/poster-shortcut-blue-fail.jpg" src="videos/shortcut/put the blue die in the basket - CTF test (fail).mp4" aria-label="Test: right view, asked for the blue die, chooses the red die"></video><figcaption><span id="shortcut-view" class="video-kicker">Right view</span><span id="shortcut-instruction">“Put the <strong class="blue-word">blue die</strong> in the basket.”</span><strong id="shortcut-outcome" aria-live="polite" class="failure-label">Chooses the red die instead.</strong></figcaption></figure><button class="text-button" id="reverse-shortcut" type="button">See the left-view test ↔</button></div>
+        </div>
+        <div class="shortcut-takeaway"><p><strong>The shortcut:</strong> using the camera view to decide which die to pick, instead of following the instruction.</p><div class="pi-stat"><strong>60%</strong><span>π₀ shortcut behavior<br>in a separate evaluation</span></div></div>
       </div>
     </section>
+
+    <section id="idea" class="story-section">
+      <div class="container idea-container"><p class="eyebrow">The key idea</p><h2>How can a VLA learn what matters?</h2>
+        <div class="future-reasoning"><div><h3>Look to the future.</h3><p>Future observations reveal how objects move and how a task progresses—rich signals for learning task-relevant features.</p></div><div><h3>But not every future feature matters.</h3><p>Raw future images and entangled visual latents also preserve the camera view, background, and other incidental details.</p></div></div>
+        <blockquote>The question is not simply whether a VLA should predict the future, but <strong>what representation of the future it should predict.</strong></blockquote>
+        <p class="idea-answer">Predict task-relevant future structure.<br><strong>Suppress domain-specific visual variation.</strong></p>
+      </div>
+    </section>
+
+    <section id="method" class="story-section method-section">
+      <div class="container"><p class="eyebrow">How DILL works</p><h2>Disentangle the features. Shape the policy.</h2>
+        <div class="method-grid">
+          <article class="method-step"><span class="step-number">01</span><h3>Learn to disentangle<br>task and domain features.</h3><p>Pretrain a Task-Domain Encoder to separate task-relevant state and motion from viewpoint, background, and other domain cues.</p><button class="figure-button" type="button" data-figure="figures/task-domain encoder training.png" aria-label="Enlarge task-domain encoder training diagram"><img src="figures/task-domain%20encoder%20training.png" alt="Task and domain encoders separate trajectory information from visual conditions using paired training examples" width="1718" height="1526" loading="lazy"><span>Enlarge figure ↗</span></button><p class="micro">Pretrained on domain-transformed trajectories from ManiSkill, MimicGen, and a subset of Open X-Embodiment.</p></article>
+          <article class="method-step"><span class="step-number">02</span><h3>Shape the VLA’s<br>action representation.</h3><p>During policy training, predict future task latents and disentangle the current representation from domain latents. Both the current representation and predicted lookahead guide the action head.</p><button class="figure-button" type="button" data-figure="figures/policy training.png" aria-label="Enlarge policy training diagram"><img src="figures/policy%20training.png" alt="During policy training, future task latents supervise lookahead prediction and domain latents regularize the current representation; both policy representations feed the action head" width="1778" height="1530" loading="lazy"><span>Enlarge figure ↗</span></button><p class="micro">Future observations provide training supervision only. At inference: current observation + instruction.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="results" class="story-section shortcut-results">
+      <div class="container"><p class="eyebrow">What changes?</p><h2>Fewer shortcuts.</h2><div class="shortcut-result-grid">
+        <figure class="video-card result-video"><video controls muted loop playsinline preload="none" width="640" height="480" poster="images/poster-shortcut-blue-fail.jpg" src="videos/shortcut/put the blue die in the basket - CTF test (fail).mp4" aria-label="Illustration of shortcut behavior: asked for the blue die, selects the red die"></video><figcaption>Illustrative shortcut: asked for blue, selects red.</figcaption></figure>
+        <div class="shortcut-metric"><p class="metric-label">Shortcut behavior ↓</p><div class="number-comparison"><div><strong>73<span>%</span></strong><span>Base VLA</span></div><span class="metric-arrow" aria-hidden="true">→</span><div class="metric-ours"><strong>5<span>%</span></strong><span>DILL</span></div></div><p>DILL is less likely to follow the task associated with a camera view instead of the commanded task.</p><p class="micro">Benchmark shortcut evaluation · Lower is better.</p></div>
+      </div></div>
+    </section>
+
+    <section id="real-world" class="story-section section-tint">
+      <div class="container"><p class="eyebrow">Real-world robustness</p><h2>Stay on task when the scene changes.</h2><p class="section-intro">DILL rollouts under familiar and perturbed visual conditions.</p>
+        <div class="demo-toolbar"><div class="task-buttons" role="group" aria-label="Choose a robot task"><button type="button" data-task="close-the-laptop" aria-pressed="true">Close the laptop</button><button type="button" data-task="pull-out-the-tissue" aria-pressed="false">Pull out the tissue</button><button type="button" data-task="put-the-shoe-upright" aria-pressed="false">Put the shoe upright</button></div><label class="condition-picker">Visual shift <select id="robust-condition"><option value="viewpoint">Viewpoint</option><option value="background">Background</option><option value="lightning">Lighting</option><option value="dynamic-background">Dynamic background</option><option value="foreground-clutter">Foreground clutter</option><option value="noise4">Noise 4</option><option value="noise5">Noise 5</option></select></label></div>
+        <div class="robustness-pair">
+          <figure class="video-card"><video id="robust-train" controls muted loop playsinline preload="none" width="640" height="480" poster="images/poster-close-the-laptop--train.jpg" src="videos/robustness/close-the-laptop--train.mp4" aria-label="DILL closes the laptop in the training condition"></video><figcaption><span class="model-tag">DILL</span> Training condition</figcaption></figure>
+          <figure class="video-card"><video id="robust-shift" controls muted loop playsinline preload="none" width="640" height="480" poster="images/poster-close-the-laptop--viewpoint.jpg" src="videos/robustness/close-the-laptop--viewpoint.mp4" aria-label="DILL closes the laptop under a viewpoint shift"></video><figcaption><span class="model-tag">DILL</span> <span id="robust-label" aria-live="polite">Viewpoint shift</span></figcaption></figure>
+        </div>
+        <div class="real-result"><div><h3>Higher success under visual shifts.</h3><a class="text-link" href="videos/robustness/">Browse all 24 rollouts ↗</a></div><div class="success-table" role="table" aria-label="Real-world success rates">
+          <div class="success-row table-head" role="row"><span role="columnheader">Success rate</span><span role="columnheader">Original</span><span aria-hidden="true"></span><span role="columnheader">Perturbed</span></div>
+          <div class="success-row" role="row"><span role="rowheader">Base VLA</span><strong role="cell">84.1%</strong><span aria-hidden="true">→</span><strong role="cell">56.2%</strong></div>
+          <div class="success-row success-ours" role="row"><span role="rowheader">DILL</span><strong role="cell">88.9%</strong><span aria-hidden="true">→</span><strong role="cell">82.9%</strong></div>
+          <p class="chart-note">Perturbed success: mean across the two perturbation groups.</p>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="bibtex" class="story-section citation-section"><div class="container"><p class="closing-line">Predict task-relevant futures. Reduce visual shortcuts.</p><h2>BibTeX</h2><pre class="bibtex-placeholder"><code>Coming Soon</code></pre></div></section>
   </main>
 
   <footer class="footer">
@@ -252,5 +173,7 @@
       originally based on <a href="https://nerfies.github.io/" target="_blank" rel="noopener noreferrer">Nerfies</a>.</p>
     <p>Template adaptations are shared under <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>.</p>
   </footer>
+  <dialog id="figure-dialog" aria-label="Expanded method figure"><button type="button" id="close-figure" aria-label="Close expanded figure">Close ✕</button><img id="expanded-figure" alt="Expanded DILL method diagram"></dialog>
+  <script src="site.js" defer></script>
 </body>
 </html>
