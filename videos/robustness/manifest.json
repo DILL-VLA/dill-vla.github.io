@@ -1,0 +1,170 @@
+[
+  {
+    "source": "close the laptop/background.mp4",
+    "file": "close-the-laptop--background.mp4",
+    "source_bytes": 2377412,
+    "web_bytes": 1084781,
+    "sha256": "db9492999ac671de35593100717c9f3aeedee9739df721029469bcbff53b1ef4"
+  },
+  {
+    "source": "close the laptop/close the laptop - train.mp4",
+    "file": "close-the-laptop--train.mp4",
+    "source_bytes": 4268850,
+    "web_bytes": 2153720,
+    "sha256": "a263d2392862c4c5ea1a6af6b6f285ef40eb308fae3d1636c37b75865d9b8a67"
+  },
+  {
+    "source": "close the laptop/dynamic background.mp4",
+    "file": "close-the-laptop--dynamic-background.mp4",
+    "source_bytes": 4059495,
+    "web_bytes": 1910545,
+    "sha256": "27122d15ee0c46fccb179ea2bc2c705e2ae56753fec64571df30bfce9760ef5d"
+  },
+  {
+    "source": "close the laptop/foreground clutter.mp4",
+    "file": "close-the-laptop--foreground-clutter.mp4",
+    "source_bytes": 3953132,
+    "web_bytes": 1816610,
+    "sha256": "0d2047025e23fce6a6bc62dd12cc8fc23b9673fe7d2892789ee2680ec604f52c"
+  },
+  {
+    "source": "close the laptop/lightning.mp4",
+    "file": "close-the-laptop--lightning.mp4",
+    "source_bytes": 11538509,
+    "web_bytes": 7382654,
+    "sha256": "0ffa915b0f2caca68e3d4b1c05dba9cd8425f1bd76e693edd65459c1033ae24f"
+  },
+  {
+    "source": "close the laptop/noise4.mp4",
+    "file": "close-the-laptop--noise4.mp4",
+    "source_bytes": 3929725,
+    "web_bytes": 2401294,
+    "sha256": "861b6a87823f3de02fd6c5299585027655eec22a1f2e97783b525185fcd70112"
+  },
+  {
+    "source": "close the laptop/noise5.mp4",
+    "file": "close-the-laptop--noise5.mp4",
+    "source_bytes": 1831159,
+    "web_bytes": 1000465,
+    "sha256": "334dfa5d3e9aeffb9a3c03aba6cc8f898854ae5ee0acc9db502f8531d6c46e6d"
+  },
+  {
+    "source": "close the laptop/viewpoint.mp4",
+    "file": "close-the-laptop--viewpoint.mp4",
+    "source_bytes": 3637776,
+    "web_bytes": 1834601,
+    "sha256": "917a3d3819d96a067319b71a0f33b2440c0bb96f6b76fed9f0f7f757b68cd15e"
+  },
+  {
+    "source": "pull out the tissue/background.mp4",
+    "file": "pull-out-the-tissue--background.mp4",
+    "source_bytes": 2544537,
+    "web_bytes": 1231088,
+    "sha256": "7c6d10c47654be6b4407ddeec386db2b8d21aadf2f0c30290ec785810211eb8c"
+  },
+  {
+    "source": "pull out the tissue/dynamic background.mp4",
+    "file": "pull-out-the-tissue--dynamic-background.mp4",
+    "source_bytes": 3607863,
+    "web_bytes": 1628065,
+    "sha256": "06c6b1a922f84a5ab7db021a749d7640225de1fd268e8c50a62b63874135454f"
+  },
+  {
+    "source": "pull out the tissue/foreground clutter.mp4",
+    "file": "pull-out-the-tissue--foreground-clutter.mp4",
+    "source_bytes": 4127068,
+    "web_bytes": 1845062,
+    "sha256": "e459ee3583a915390b8be8d26fe0d746003dc2c93bc0047c1a517d225ed5eb8c"
+  },
+  {
+    "source": "pull out the tissue/lightning.mp4",
+    "file": "pull-out-the-tissue--lightning.mp4",
+    "source_bytes": 9388353,
+    "web_bytes": 5541991,
+    "sha256": "b62d14850c6fa0a1d4025ce00b1e066d48ab1ab9cb35ddac03c328b3567b2aa5"
+  },
+  {
+    "source": "pull out the tissue/noise3.mp4",
+    "file": "pull-out-the-tissue--noise3.mp4",
+    "source_bytes": 3336681,
+    "web_bytes": 1943693,
+    "sha256": "334e18ab9ded1a0d605b3ba7aefddf3a362b32ae684901b61e8369242a404579"
+  },
+  {
+    "source": "pull out the tissue/noise4.mp4",
+    "file": "pull-out-the-tissue--noise4.mp4",
+    "source_bytes": 2928148,
+    "web_bytes": 1771203,
+    "sha256": "74fceda6581a96288a8c44ef0ed89f972ef0eb328e373f14990c76e16ffb28dc"
+  },
+  {
+    "source": "pull out the tissue/pull out the tissue - train.mp4",
+    "file": "pull-out-the-tissue--train.mp4",
+    "source_bytes": 3544882,
+    "web_bytes": 1741320,
+    "sha256": "add34b24043da872c32023ebf1dd05fd970e0361d0f56b0f7efba6074207461d"
+  },
+  {
+    "source": "pull out the tissue/viewpoint.mp4",
+    "file": "pull-out-the-tissue--viewpoint.mp4",
+    "source_bytes": 2581643,
+    "web_bytes": 1210604,
+    "sha256": "455d95fc569ed74739a7971a7e5ff2b5057c3a517aa6b5e9756928209f39f2e0"
+  },
+  {
+    "source": "put the shoe upright/background.mp4",
+    "file": "put-the-shoe-upright--background.mp4",
+    "source_bytes": 2774843,
+    "web_bytes": 1239590,
+    "sha256": "5aaa28624b8e21a856a516beef2d40d6b972836156ce1ba1663f656e0ad53b73"
+  },
+  {
+    "source": "put the shoe upright/dynamic background.mp4",
+    "file": "put-the-shoe-upright--dynamic-background.mp4",
+    "source_bytes": 3785401,
+    "web_bytes": 1664684,
+    "sha256": "b6a6ecd3ded0b7283cbfe6f0998b9ec25946bdb1374aac4e42bdedf7d345363e"
+  },
+  {
+    "source": "put the shoe upright/foreground clutter.mp4",
+    "file": "put-the-shoe-upright--foreground-clutter.mp4",
+    "source_bytes": 4910592,
+    "web_bytes": 2380107,
+    "sha256": "c2a3cad3032707e91be87f2b86ea465d41458c597786dad58225b4ab0a1dc39e"
+  },
+  {
+    "source": "put the shoe upright/lightning.mp4",
+    "file": "put-the-shoe-upright--lightning.mp4",
+    "source_bytes": 16367085,
+    "web_bytes": 10214319,
+    "sha256": "326627d4a5e1de0c0d06a9483a5ef41569660a0bd448034c927f7616ecff1b11"
+  },
+  {
+    "source": "put the shoe upright/noise1.mp4",
+    "file": "put-the-shoe-upright--noise1.mp4",
+    "source_bytes": 5924661,
+    "web_bytes": 4055713,
+    "sha256": "2e2ca32189a5a67a463c9083247186af869839958fe3da9dd48dd56321b421c6"
+  },
+  {
+    "source": "put the shoe upright/noise2.mp4",
+    "file": "put-the-shoe-upright--noise2.mp4",
+    "source_bytes": 1003803,
+    "web_bytes": 621497,
+    "sha256": "5a6efdc1f60bad1c450c777f81f9e7a8461a8a2c152ad3feacfb08a535a31648"
+  },
+  {
+    "source": "put the shoe upright/put the shoe upright - train.mp4",
+    "file": "put-the-shoe-upright--train.mp4",
+    "source_bytes": 2939290,
+    "web_bytes": 1477176,
+    "sha256": "e75806a71e5437b12c52322ac4ca6503a90c6abda640f70266681f4258e0f6d7"
+  },
+  {
+    "source": "put the shoe upright/viewpoint.mp4",
+    "file": "put-the-shoe-upright--viewpoint.mp4",
+    "source_bytes": 3563843,
+    "web_bytes": 1831166,
+    "sha256": "83bd81f74bd8dd54037906aaa45b6b8df1245a415af5656ef91844fb03096304"
+  }
+]

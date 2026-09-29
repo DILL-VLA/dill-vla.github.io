@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Real-world robustness demos | DILL</title>
+  <meta name="description" content="Browse 24 real-world demonstration clips across three manipulation tasks.">
+  <style>
+    :root { color-scheme: light; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #26302d; background: #fafbf9; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(940px, calc(100% - 40px)); margin: 0 auto; padding: 32px 0 56px; }
+    a { color: inherit; text-underline-offset: 4px; }
+    .back { font-size: 14px; text-decoration: none; color: #5b6b62; }
+    .eyebrow { margin: 40px 0 10px; color: #537862; text-transform: uppercase; letter-spacing: .13em; font-size: 12px; font-weight: 650; }
+    h1 { margin: 0; font-size: clamp(28px, 5vw, 42px); letter-spacing: -.04em; line-height: 1.15; }
+    .intro { margin: 14px 0 26px; color: #69716d; line-height: 1.6; font-size: 15px; }
+    .picker { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 20px; }
+    label { display: grid; gap: 8px; color: #526159; font-size: 12px; font-weight: 600; }
+    select { min-width: 0; width: 100%; padding: 13px 40px 13px 14px; border: 1px solid #d8e0d9; border-radius: 9px; background: white; font: inherit; font-size: 15px; color: #26302d; }
+    select:focus-visible, a:focus-visible { outline: 3px solid #629a77; outline-offset: 3px; }
+    figure { margin: 0; padding: 16px; background: white; border: 1px solid #e0e6df; border-radius: 14px; box-shadow: 0 8px 30px #283a2c06; }
+    video { display: block; width: min(100%, 720px); height: auto; aspect-ratio: 4/3; margin: auto; border-radius: 7px; background: #17201b; }
+    figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; padding: 17px 4px 2px; font-size: 14px; }
+    .count { color: #768078; font-size: 13px; }
+    .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin: 20px 0 0; color: #718076; font-size: 12px; line-height: 1.6; }
+    #error { color: #9a342c; margin-bottom: 0; }
+    @media (max-width: 540px) { main { width: calc(100% - 28px); padding-top: 24px; } .eyebrow { margin-top: 28px; } .picker { grid-template-columns: 1fr; gap: 12px; } figure { padding: 10px; } }
+  </style>
+</head>
+<body>
+<main>
+  <a class="back" href="../../">← DILL project</a>
+  <p class="eyebrow">Real-world demonstrations</p>
+  <h1>Robustness, in motion.</h1>
+  <p class="intro">Explore 24 clips across three manipulation tasks and their recorded conditions.</p>
+  <div class="picker">
+    <label>Task<select id="task">
+      <option value="close-the-laptop">Close the laptop</option>
+      <option value="pull-out-the-tissue">Pull out the tissue</option>
+      <option value="put-the-shoe-upright">Put the shoe upright</option>
+    </select></label>
+    <label>Condition<select id="condition"></select></label>
+  </div>
+  <figure>
+    <video id="demo" width="640" height="480" controls muted loop playsinline preload="metadata" aria-label="Real-world demonstration"></video>
+    <figcaption><strong id="caption"></strong><span class="count" id="position"></span></figcaption>
+    <p id="error" role="alert" hidden>This clip could not be loaded. You can <a id="fallback" href="#">open the MP4 directly</a>.</p>
+  </figure>
+  <div class="foot"><span>Original playback speed · Looping playback</span><a id="direct" href="#">Open this clip ↗</a></div>
+  <noscript><p>Enable JavaScript to browse the clips, or <a href="https://github.com/DILL-VLA/dill-vla.github.io/tree/main/videos/robustness">view all video files</a>.</p></noscript>
+</main>
+<script>
+  const task = document.getElementById('task');
+  const condition = document.getElementById('condition');
+  const video = document.getElementById('demo');
+  const shared = [['train','Training setting'],['background','Background'],['dynamic-background','Dynamic background'],['foreground-clutter','Foreground clutter'],['lightning','Lighting'],['viewpoint','Viewpoint']];
+  const noise = {'close-the-laptop': [['noise4','Noise 4'],['noise5','Noise 5']], 'pull-out-the-tissue': [['noise3','Noise 3'],['noise4','Noise 4']], 'put-the-shoe-upright': [['noise1','Noise 1'],['noise2','Noise 2']]};
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  video.muted = true;
+  function showClip() {
+    const path = task.value + '--' + condition.value + '.mp4';
+    document.getElementById('error').hidden = true;
+    video.pause();
+    video.autoplay = !reducedMotion.matches;
+    video.src = path;
+    const caption = task.selectedOptions[0].text + ' · ' + condition.selectedOptions[0].text;
+    video.setAttribute('aria-label', caption);
+    document.getElementById('caption').textContent = caption;
+    document.getElementById('position').textContent = 'Clip ' + (condition.selectedIndex + 1) + ' of 8';
+    document.getElementById('direct').href = path;
+    document.getElementById('fallback').href = path;
+    video.load();
+  }
+  function showTask() {
+    const previous = condition.value;
+    condition.replaceChildren(...shared.concat(noise[task.value]).map(([value,label]) => new Option(label,value)));
+    if ([...condition.options].some(option => option.value === previous)) condition.value = previous;
+    showClip();
+  }
+  task.addEventListener('change', showTask);
+  condition.addEventListener('change', showClip);
+  video.addEventListener('error', () => { document.getElementById('error').hidden = false; });
+  showTask();
+</script>
+</body>
+</html>
