@@ -214,7 +214,7 @@ button:focus-visible, select:focus-visible { outline: 3px solid #52a582; outline
 .shortcut-takeaway p { margin: 0; max-width: 730px; font-size: 16px; }
 .pi-stat { display: flex; align-items: center; gap: 14px; margin-left: auto; flex-shrink: 0; }
 .pi-stat strong { color: #7a544d; font: 600 38px/1 'Google Sans',sans-serif; letter-spacing: -1px; }
-.pi-stat span { font-size: 12px; color: #78766e; line-height: 1.6; }
+.pi-stat span { max-width: 220px; font-size: 12px; color: #78766e; line-height: 1.6; }
 .idea-container { max-width: 980px; }
 .future-reasoning { display: grid; grid-template-columns: 1fr 1fr; gap: 54px; margin: 35px 0; }
 .future-reasoning h3 { font-size: 20px; }
@@ -228,13 +228,12 @@ blockquote strong { color: var(--green); font-weight: 600; }
 .step-number { font-size: 12px; font-weight: 700; color: var(--green); display: block; margin-bottom: 14px; }
 .method-step h3 { font-size: 24px; }
 .method-step>p:not(.micro) { font-size: 14px; min-height: 90px; margin-bottom: 24px; }
-.figure-button { display: block; width: 100%; padding: 0; background: none; border: none; text-align: left; }
-.figure-button img { width: 100%; height: auto; display: block; }
-.figure-button span { display: block; color: var(--muted); font-size: 11px; margin-top: 8px; }
+.method-figure { margin: 0; }
+.method-figure img { width: 100%; height: auto; display: block; }
 .method-step .micro { margin: 17px 0 0; }
 .shortcut-results { border-top: 1px solid var(--line); }
-.shortcut-result-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 90px; align-items: center; margin-top: 30px; }
-.result-video { max-width: 450px; }
+.shortcut-result-grid { display: grid; grid-template-columns: .75fr 1.25fr; gap: 90px; align-items: center; margin-top: 30px; }
+.result-video { width: 100%; max-width: 340px; }
 .result-video figcaption { font-size: 12px; color: var(--muted); }
 .metric-label { color: #728074; font-size: 13px; margin: 0 0 18px; }
 .number-comparison { display: flex; gap: 30px; align-items: center; }
@@ -269,10 +268,6 @@ blockquote strong { color: var(--green); font-weight: 600; }
 .closing-line { text-align: center; font: 500 25px/1.4 'Google Sans',sans-serif; color: var(--green); margin: 0 0 60px; letter-spacing: -.4px; }
 .citation-section h2 { font-size: 23px; }
 .bibtex-placeholder { font-size: 13px; background: #f6f7f4; padding: 20px; }
-#figure-dialog { border: 0; border-radius: 12px; padding: 20px; max-width: min(94vw,1400px); max-height: 94vh; }
-#figure-dialog::backdrop { background: #15291ec7; backdrop-filter: blur(4px); }
-#close-figure { display: block; margin: 0 0 15px auto; background: #eef2ec; border: 0; color: #375342; padding: 9px 15px; border-radius: 6px; font-size: 13px; }
-#expanded-figure { display: block; max-width: 100%; max-height: 79vh; width: auto; margin: auto; }
 @media (max-width:1000px) {
  .container,.nav-inner { width: calc(100% - 40px); }
  .benchmark-block { gap: 40px; grid-template-columns: .8fr 1.2fr; }
@@ -313,11 +308,11 @@ blockquote strong { color: var(--green); font-weight: 600; }
  .training-pair { gap: 13px; }
  .video-card figcaption { font-size: 12px; }
  .test-example { max-width: 430px; }
- .shortcut-takeaway { align-items: start; gap: 20px; }
+ .shortcut-takeaway { align-items: start; flex-direction: column; gap: 20px; }
  .shortcut-takeaway p { font-size: 14px; }
- .pi-stat { display: grid; gap: 8px; }
+ .pi-stat { margin-left: 0; gap: 14px; }
  .pi-stat strong { font-size: 32px; }
- .pi-stat span { font-size: 10px; }
+ .pi-stat span { font-size: 12px; }
  .future-reasoning { gap: 22px; margin: 28px 0; }
  .future-reasoning h3 { font-size: 19px; }
  .future-reasoning p { font-size: 14px; }
@@ -328,7 +323,7 @@ blockquote strong { color: var(--green); font-weight: 600; }
  .method-step h3 { font-size: 24px; }
  .method-step>p:not(.micro) { min-height: 0; }
  .method-step h3 br { display: none; }
- .result-video { max-width: 100%; }
+ .result-video { max-width: 300px; }
  .number-comparison>div>strong { font-size: 76px; }
  .shortcut-metric>p:not(.metric-label):not(.micro) { margin-top: 20px; }
  .demo-toolbar { display: grid; gap: 18px; }

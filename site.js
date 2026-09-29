@@ -84,11 +84,4 @@
     updateRollout();
   }));
   condition.addEventListener('change', updateRollout);
-  const dialog = document.querySelector('#figure-dialog');
-  document.querySelectorAll('[data-figure]').forEach(button => button.addEventListener('click', () => {
-    const image = document.querySelector('#expanded-figure'); image.src = button.dataset.figure; image.alt = button.querySelector('img').alt;
-    dialog.showModal();
-  }));
-  document.querySelector('#close-figure').addEventListener('click', () => dialog.close());
-  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
 })();
